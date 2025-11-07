@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Empréstimos</h2>
+
+<form action="/emprestimos/add" method="POST" class="row g-2 mb-4">
+  <div class="col-md-3">
+    <select name="usuario" class="form-select" required>
+      <option value="">Usuário</option>
+      {% for u in usuarios %}
+      <option value="{{ u.ID_usuario }}">{{ u.Nome_usuario }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select name="livro" class="form-select" required>
+      <option value="">Livro</option>
+      {% for l in livros %}
+      <option value="{{ l.ID_livro }}">{{ l.Titulo }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-2"><input type="date" name="data_emprestimo" class="form-control" placeholder="Emprestimo"></div>
+  <div class="col-md-2"><input type="date" name="data_prevista" class="form-control" placeholder="Prevista"></div>
+  <div class="col-md-2"><input type="date" name="data_real" class="form-control" placeholder="Devolução real"></div>
+  <div class="col-md-2 mt-2">
+    <select name="status" class="form-select">
+      <option value="pendente">Pendente</option>
+      <option value="devolvido">Devolvido</option>
+      <option value="atrasado">Atrasado</option>
+    </select>
+  </div>
+  <div class="col-md-2 mt-2"><button class="btn btn-primary w-100">Adicionar</button></div>
+</form>
+
+<table class="table table-striped align-middle">
+  <thead class="table-dark">
+    <tr><th>ID</th><th>Usuário</th><th>Livro</th><th>Emprestimo</th><th>Prevista</th><th>Devolução</th><th>Status</th><th>Ações</th></tr>
+  </thead>
+  <tbody>
+    {% for e in emprestimos %}
+    <tr>
+      <td>{{ e.ID_emprestimo }}</td>
+      <td>{{ e.Nome_usuario }}</td>
+      <td>{{ e.Titulo }}</td>
+      <td>{{ e.Data_emprestimo }}</td>
+      <td>{{ e.Data_devolucao_prevista }}</td>
+      <td>{{ e.Data_devolucao_real }}</td>
+      <td>{{ e.Status_emprestimo }}</td>
+      <td><a href="/emprestimos/delete/{{ e.ID_emprestimo }}" class="btn btn-danger btn-sm">Excluir</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

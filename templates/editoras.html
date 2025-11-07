@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Editoras</h2>
+
+<form action="/editoras/add" method="POST" class="row g-2 mb-4">
+  <div class="col-md-4"><input name="nome" class="form-control" placeholder="Nome da editora" required></div>
+  <div class="col-md-6"><input name="endereco" class="form-control" placeholder="Endereço"></div>
+  <div class="col-md-2"><button class="btn btn-primary w-100">Adicionar</button></div>
+</form>
+
+<table class="table table-striped align-middle">
+  <thead class="table-dark"><tr><th>ID</th><th>Nome</th><th>Endereço</th><th>Ações</th></tr></thead>
+  <tbody>
+    {% for e in editoras %}
+    <tr>
+      <td>{{ e.ID_editora }}</td>
+      <td>{{ e.Nome_editora }}</td>
+      <td>{{ e.Endereco_editora }}</td>
+      <td><a href="/editoras/delete/{{ e.ID_editora }}" class="btn btn-danger btn-sm">Excluir</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

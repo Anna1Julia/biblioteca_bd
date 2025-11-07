@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Usuários</h2>
+
+<form action="/usuarios/add" method="POST" class="row g-2 mb-4">
+  <div class="col-md-3"><input name="nome" class="form-control" placeholder="Nome" required></div>
+  <div class="col-md-3"><input name="email" class="form-control" placeholder="Email"></div>
+  <div class="col-md-2"><input name="telefone" class="form-control" placeholder="Telefone"></div>
+  <div class="col-md-2"><input type="date" name="data_inscricao" class="form-control"></div>
+  <div class="col-md-1"><input name="multa" class="form-control" placeholder="Multa"></div>
+  <div class="col-md-1"><button class="btn btn-primary w-100">Adicionar</button></div>
+</form>
+
+<table class="table table-striped align-middle">
+  <thead class="table-dark"><tr><th>ID</th><th>Nome</th><th>Email</th><th>Telefone</th><th>Data</th><th>Multa</th><th>Ações</th></tr></thead>
+  <tbody>
+    {% for u in usuarios %}
+    <tr>
+      <td>{{ u.ID_usuario }}</td>
+      <td>{{ u.Nome_usuario }}</td>
+      <td>{{ u.Email }}</td>
+      <td>{{ u.Numero_telefone }}</td>
+      <td>{{ u.Data_inscricao }}</td>
+      <td>{{ u.Multa_atual }}</td>
+      <td><a href="/usuarios/delete/{{ u.ID_usuario }}" class="btn btn-danger btn-sm">Excluir</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
