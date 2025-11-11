@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from config import init_database_from_schema
 import models
 
 app = Flask(__name__)
@@ -192,4 +193,5 @@ def delete_emprestimo(id):
 
 
 if __name__ == '__main__':
+    init_database_from_schema()
     app.run(debug=True)
