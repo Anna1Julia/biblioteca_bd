@@ -24,7 +24,7 @@ def _to_decimal_or_none(value) -> Optional[Decimal]:
     except Exception:
         return None
 
-# ---------------- AUTORES ----------------
+
 def get_autores():
     conn = get_db_connection()
     try:
@@ -69,7 +69,6 @@ def delete_autor(id):
         conn.close()
 
 
-# ---------------- GENEROS ----------------
 def get_generos():
     conn = get_db_connection()
     try:
@@ -107,7 +106,6 @@ def delete_genero(id):
         conn.close()
 
 
-# ---------------- EDITORAS ----------------
 def get_editoras():
     conn = get_db_connection()
     try:
@@ -145,7 +143,6 @@ def delete_editora(id):
         conn.close()
 
 
-# ---------------- LIVROS ----------------
 def get_livros():
     conn = get_db_connection()
     try:
@@ -214,7 +211,6 @@ def delete_livro(id):
         conn.close()
 
 
-# ---------------- USUARIOS ----------------
 def get_usuarios():
     conn = get_db_connection()
     try:
@@ -256,7 +252,6 @@ def delete_usuario(id):
         conn.close()
 
 
-# ---------------- EMPRESTIMOS ----------------
 def get_emprestimos():
     conn = get_db_connection()
     try:

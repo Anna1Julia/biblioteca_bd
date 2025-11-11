@@ -42,7 +42,6 @@ def init_database_from_schema(schema_path: str = None):
         return
     sql_text = Path(schema_file).read_text(encoding='utf-8')
 
-    # Use a bootstrap connection without selecting a DB first
     db_host = os.environ.get('DB_HOST', '127.0.0.1')
     db_port = int(os.environ.get('DB_PORT', '3306'))
     db_user = os.environ.get('DB_USER', 'root')
@@ -56,7 +55,7 @@ def init_database_from_schema(schema_path: str = None):
         except Exception:
             pass
         cur = bootstrap_conn.cursor()
-        # Execute multi statements (CREATE DATABASE, USE, CREATE TABLES)
+        
         for statement in [s.strip() for s in sql_text.split(';') if s.strip()]:
             cur.execute(statement)
     finally:
