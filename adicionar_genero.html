@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Adicionar Gênero</h2>
+
+<form method="POST" class="card p-3 shadow-sm">
+  <div class="mb-3">
+    <label class="form-label">Nome do Gênero</label>
+    <input type="text" name="nome" class="form-control" placeholder="Ex: Romance, Aventura, Drama..." required>
+  </div>
+  <button type="submit" class="btn btn-primary">Salvar</button>
+  <a href="{{ url_for('listar_generos') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

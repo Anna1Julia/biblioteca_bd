@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Editar Empréstimo</h2>
+<form method="POST" class="card p-3">
+  <div class="row g-2">
+    <div class="col-md-6">
+      <label class="form-label">Usuário</label>
+      <select name="usuario" class="form-select" required>
+        {% for u in usuarios %}
+        <option value="{{ u.ID_usuario }}" {% if u.ID_usuario == emprestimo.Usuario_id %}selected{% endif %}>
+          {{ u.Nome_usuario }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Livro</label>
+      <select name="livro" class="form-select" required>
+        {% for l in livros %}
+        <option value="{{ l.ID_livro }}" {% if l.ID_livro == emprestimo.Livro_id %}selected{% endif %}>
+          {{ l.Titulo }} {% if l.Quantidade_disponivel == 0 and l.ID_livro != emprestimo.Livro_id %}(Indisponível){% endif %}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="row g-2 mt-3">
+    <div class="col-md-6">
+      <label class="form-label">Data do Empréstimo</label>
+      <input type="date" name="data_emprestimo" class="form-control" value="{{ emprestimo.Data_emprestimo }}" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Data de Devolução Prevista</label>
+      <input type="date" name="data_prevista" class="form-control" value="{{ emprestimo.Data_devolucao_prevista }}" required>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary mt-3">Salvar Alterações</button>
+  <a href="{{ url_for('listar_emprestimos') }}" class="btn btn-secondary mt-3">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Empréstimos</h2>
+<a href="/emprestimos/add" class="btn btn-success mb-3">+ Novo Empréstimo</a>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Usuário</th>
+      <th>Livro</th>
+      <th>Data Empréstimo</th>
+      <th>Data Prevista</th>
+      <th>Data Devolução</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for e in emprestimos %}
+    <tr>
+      <td>{{ e.ID_emprestimo }}</td>
+      <td>{{ e.Nome_usuario }}</td>
+      <td>{{ e.Titulo }}</td>
+      <td>{{ e.Data_emprestimo }}</td>
+      <td>{{ e.Data_devolucao_prevista }}</td>
+      <td>{{ e.Data_devolucao_real or '-' }}</td>
+      <td>{{ e.Status_emprestimo }}</td>
+      <td class="d-flex gap-1 flex-column flex-md-row align-items-center">
+        {% if e.Status_emprestimo == 'pendente' %}
+        <form method="POST" action="/emprestimos/devolver/{{ e.ID_emprestimo }}">
+          <button class="btn btn-sm btn-outline-primary">Devolver</button>
+        </form>
+        {% else %}
+        <span class="text-success">✔</span>
+        <form method="POST" action="/emprestimos/excluir/{{ e.ID_emprestimo }}" 
+              onsubmit="return confirm('Deseja realmente apagar este histórico?');">
+          <button type="submit" class="delete-button btn btn-sm btn-outline-danger" title="Excluir">
+            🗑️
+          </button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<style>
+  .delete-button {
+    border: none;
+    background: transparent;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  .delete-button:hover {
+    transform: scale(1.2);
+    color: #dc3545;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Gêneros</h2>
+<a href="{{ url_for('adicionar_genero') }}" class="btn btn-success mb-3">Adicionar Gênero</a>
+
+<table class="table table-striped shadow-sm">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Nome do Gênero</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for genero in generos %}
+    <tr>
+      <td>{{ genero.ID_genero }}</td>
+      <td>{{ genero.Nome_genero }}</td>
+      <td>
+        <a href="{{ url_for('editar_genero', id=genero.ID_genero) }}" class="btn btn-primary">Editar</a>
+        <form action="{{ url_for('excluir_genero', id=genero.ID_genero) }}" method="POST" style="display:inline;">
+          <button class="btn btn-danger btn-sm" onclick="return confirm('Deseja excluir este gênero?')">Excluir</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Editoras</h2>
+<a href="{{ url_for('adicionar_editora') }}" class="btn btn-success mb-3">Adicionar Editora</a>
+
+<table class="table table-striped shadow-sm">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Endereço</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for editora in editoras %}
+    <tr>
+      <td>{{ editora.ID_editora }}</td>
+      <td>{{ editora.Nome_editora }}</td>
+      <td>{{ editora.Endereco_editora }}</td>
+      <td>
+        <a href="{{ url_for('editar_editora', id=editora.ID_editora) }}" class="btn btn-primary">Editar</a>
+        <form action="{{ url_for('excluir_editora', id=editora.ID_editora) }}" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Deseja excluir esta editora?')">Excluir</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

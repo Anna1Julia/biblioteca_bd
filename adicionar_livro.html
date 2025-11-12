@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4 p-4 bg-light rounded shadow-sm" style="max-width: 900px;">
+  <h2 class="text-center mb-4 text-dark">Adicionar Livro</h2>
+
+  <form action="{{ url_for('adicionar_livro') }}" method="POST">
+
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Título</label>
+        <input type="text" name="titulo" class="form-control" placeholder="Digite o título" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Autor</label>
+        <select name="autor" class="form-select">
+          <option value="">-- Selecionar --</option>
+          {% for autor in autores %}
+          <option value="{{ autor.ID_autor }}">{{ autor.Nome_autor }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+ 
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Editora</label>
+        <select name="editora" class="form-select">
+          <option value="">-- Selecionar --</option>
+          {% for editora in editoras %}
+          <option value="{{ editora.ID_editora }}">{{ editora.Nome_editora }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Gênero</label>
+        <select name="genero" class="form-select">
+          <option value="">-- Selecionar --</option>
+          {% for genero in generos %}
+          <option value="{{ genero.ID_genero }}">{{ genero.Nome_genero }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Ano de Publicação</label>
+        <input type="date" name="ano_publicacao" class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Quantidade Disponível</label>
+        <input type="number" name="quantidade" class="form-control" min="1" max="10" value="1" required>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Resumo</label>
+      <textarea name="resumo" class="form-control" rows="3" placeholder="Escreva um breve resumo..."></textarea>
+    </div>
+
+
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary px-4 me-2">Adicionar</button>
+      <a href="{{ url_for('listar_livros') }}" class="btn btn-secondary">Cancelar</a>
+    </div>
+
+  </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Adicionar Usuário</h2>
+
+<form action="{{ url_for('adicionar_usuario') }}" method="POST" class="w-50 mx-auto">
+  <div class="mb-3">
+    <label class="form-label">Nome:</label>
+    <input type="text" name="nome" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Email:</label>
+    <input type="email" name="email" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Telefone:</label>
+    <input type="tel"
+           name="telefone"
+           id="telefone"
+           class="form-control"
+           pattern="\(\d{2}\)\s?\d{5}-\d{4}"
+           placeholder="(11) 98765-4321"
+           maxlength="15"
+           required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Data de Inscrição:</label>
+    <input type="date" name="data_inscricao" class="form-control" required>
+  </div>
+
+  <button type="submit" class="btn btn-success">Adicionar</button>
+  <a href="{{ url_for('listar_usuarios') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+
+<script>
+const telefoneInput = document.getElementById('telefone');
+if (telefoneInput) {
+  telefoneInput.addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 11) value = value.slice(0,11);
+    if (value.length > 6) {
+      e.target.value = `(${value.slice(0,2)}) ${value.slice(2,7)}-${value.slice(7,11)}`;
+    } else if (value.length > 2) {
+      e.target.value = `(${value.slice(0,2)}) ${value.slice(2)}`;
+    } else {
+      e.target.value = value;
+    }
+  });
+}
+</script>
+{% endblock %}
